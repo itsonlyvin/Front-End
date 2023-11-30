@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Log in</title>
+	<script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
+	<link rel="stylesheet" type="text/css" href="loginstyle.css">
+
+
+<style>
+#svg {
+  width: 100%;
+  height: 100%;
+ 
+}
+body {
+  margin: 0;
+  height: 100vh;
+}
+
+line {
+  transform-origin: center;
+  animation: do 4s infinite alternate;
+}
+line:nth-child(6n) {
+  animation-delay: -1s;
+}
+line:nth-child(6n + 1) {
+  animation-delay: -2s;
+}
+line:nth-child(6n + 2) {
+  animation-delay: -3s;
+}
+line:nth-child(6n + 3) {
+  animation-delay: -4s;
+}
+line:nth-child(6n + 4) {
+  animation-delay: -5s;
+}
+
+@keyframes do {
+  100% {
+    transform: scale(0.69);
+  }
+}
+	 </style>
+
+
+
+
+</head>
+<body>
+
+
+<div style="position: absolute;height: 600px;width: 600px;">
+	<svg id="svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="1" fill="white" stroke="#a06cd5"></circle>
+</svg>
+</div>
+
+
+
+	<div class="container" style="position: relative;">
+    	<div class="card">
+	        <form>
+	            <input type="text" placeholder="Username">
+	            <input type="password" placeholder="Password">
+	            <button type="submit">Login</button>
+	        </form>
+	        <div class="switch">
+	            <span>Don't have an account?</span>
+	            <button >SignUp</button>
+	        </div>
+	    </div>
+	</div>
+
+
+
+
+
+<script type="text/javascript">
+		
+		const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const NUM_LINES = 69;
+const svg = document.querySelector("#svg");
+
+const doArt = () => {
+  // Clear old
+  let oldLines = svg.querySelectorAll("line");
+  if (oldLines) oldLines.forEach((line) => line.remove());
+
+  // Draw new
+  let newLines;
+  for (let i = 0; i < NUM_LINES; i++) {
+    newLines += `
+    <line 
+      x1="50"
+      y1="50" 
+      x2="${getRandomInt(10, 90)}"
+      y2="${getRandomInt(10, 90)}"
+      stroke="rgba(160, 108, 213,0.${getRandomInt(0, 25)})"
+      stroke-linecap="round"
+      stroke-width="${getRandomInt(1, 2)}"
+
+    />`;
+  }
+
+  svg.insertAdjacentHTML("afterbegin", newLines);
+};
+
+doArt();
+
+window.addEventListener("click", doArt);
+
+	</script>
+
+
+</body>
+</html>
